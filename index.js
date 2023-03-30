@@ -1,6 +1,6 @@
 const new_game_button = document.getElementById("new-game-button");
 
-// Generate board using tr and td
+let board = [];
 
 const generate_board = (width, height) => {
 	const table = document.createElement("table");
@@ -9,15 +9,26 @@ const generate_board = (width, height) => {
 
 	for (let row = 0; row < height; row++) {
 		board.push([]);
-		const tr = board.appendChild(document.createElement("tr"));
+		const tr = table.appendChild(document.createElement("tr"));
 		tr.id = `row-${row}`;
+		tr.className = "row";
 
 		for (let col = 0; col < width; col++) {
-			board[row].push(0);
 			const td = tr.appendChild(document.createElement("td"));
-			td.id = `col-${col}`;
+			td.id = `cell-${row}-${col}`;
+			id.className = "cell";
 
-			td.textContent = 0;
+			let num = 0;
+
+			if (row == 0 && col == 0) num = 1;
+			else if (row == 1 && col == 1) num = 2;
+			else if (row == 2 && col == 2) num = 3;
+			else if (row == height - 1 && col == width - 1) num = 1;
+			else if (row == height - 2 && col == width - 2) num = 2;
+			else if (row == height - 3 && col == width - 3) num = 3;
+
+			board[row].push(num);
+			td.textContent = num;
 		}
 	}
 
@@ -30,7 +41,11 @@ new_game_button.addEventListener("click", () => {
 	const width = document.getElementById("width-input").value;
 	const height = document.getElementById("height-input").value;
 
-	generate_board(width, height);
+	try {
+		board = generate_board(width, height);
+	} catch (e) {
+		alert(e);
+	}
 
 	new_game_button.parentElement.hidden = true;
 });
