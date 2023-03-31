@@ -81,10 +81,25 @@ const generate_board = (width, height) => {
 
 						let next_move_possible = false;
 
+
 						for (let row = 0; row < height; row++) {
 							for (let col = 0; col < width; col++) {
 								const cell = board[row][col];
 								if (cell.player == null && generate_move(row, col, turn)) next_move_possible = true;
+							}
+						}
+
+						if (!next_move_possible) {
+							for (let row = 0; row < height; row++) {
+								for (let col = 0; col < width; col++) {
+									const cell = board[row][col];
+									if (cell.player == null && generate_move(row, col, turn == 1 ? 2 : 1)) next_move_possible = true;
+								}
+							}
+
+							if (next_move_possible) {
+								turn = turn == 1 ? 2 : 1;
+								turn_span.textContent = turn == 1 ? "Red" : "Blue";
 							}
 						}
 
