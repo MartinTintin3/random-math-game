@@ -1,6 +1,17 @@
 const new_game_button = document.getElementById("new-game-button");
 const turn_span = document.getElementById("turn-span");
 
+const rules_button = document.getElementById("rules-button");
+
+rules_button.addEventListener("click", () => {
+	// Red goes first
+	// Players take turn filling in cells that touch their own cells (including diagonals)
+	// Every new cell's number is the highest number of the touching cells + 1
+	// When there are no more empty cells, the player with the highest number wins (if there's a tie, the last player to make a move wins)
+
+	alert("1. Red goes first\n2. Players take turn filling in cells that touch their own cells (including diagonals)\n3. Every new cell's number is the highest number of the touching cells + 1\n4. When there are no more empty cells, the player with the highest number cell wins (if there's a tie, the last player to make a move wins)");
+});
+
 let board = [];
 
 let turn = 1;
